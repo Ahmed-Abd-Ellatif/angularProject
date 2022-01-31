@@ -1,0 +1,183 @@
+
+
+ <!-- Button trigger modal -->
+ <button type="button" class="btn btn-danger btn-lg mb-3 btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  <i class="fas fa-plus"></i> Add Student
+</button>
+<!-- Modal =========Create Post==================-->
+<div class="modal fade mt-5 " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Add Student</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- ============================= -->
+        <main class="form-login">
+          <form #login="ngForm" >
+        <!-- =========================================================== -->
+            <!-- Name -->
+            <!-- =========================================================== -->
+            <div class="form-floating mb-1">
+              <input type="text"
+              [ngClass]="{'form-control':true,'is-invalid': name.invalid &&(name.touched || login.submitted)}"
+               placeholder="name@example.com"
+               name="name" #name="ngModel" ngModel
+               required
+                 >
+              <label for="floatingInput">Student Name</label>
+            </div>
+            <!-- ======Error -->
+            <div
+            *ngIf="name.invalid &&(name.touched || login.submitted)">
+              <P class="text-danger text-start" *ngIf="name.errors?.['required']">Name is required</P>
+            </div>
+            <!-- =========================================================== -->
+            <!-- Email -->
+            <!-- =========================================================== -->
+            <div class="form-floating mb-1">
+              <input type="email"
+              [ngClass]="{'form-control':true,'is-invalid': email.invalid &&(email.touched || login.submitted)}"
+               placeholder="name@example.com"
+               name="email" #email="ngModel" ngModel
+               required
+               email
+                 >
+              <label for="floatingInput">Email</label>
+            </div>
+            <!-- ======Error -->
+            <div
+            *ngIf="email.invalid &&(email.touched || login.submitted)">
+              <P class="text-danger text-start" *ngIf="email.errors?.['required']">Email is required</P>
+              <p class="text-danger text-start" *ngIf="email.errors?.['email']">must be Email .. a@a.com</p>
+            </div>
+            <!-- =========================================================== -->
+            <!-- Password -->
+            <!-- =========================================================== -->
+            <div class="form-floating mb-1">
+              <input type="password"
+              [ngClass]="{'form-control':true,'is-invalid': password.invalid &&(password.touched || login.submitted)}"
+              placeholder="National ID"
+              name="password" #password="ngModel" ngModel
+              required
+              minlength="14"
+                >
+              <label for="floatingPassword">National ID</label>
+            </div>
+             <!-- ======Error -->
+             <div
+             *ngIf="password.invalid &&(password.touched || login.submitted)">
+               <P class="text-danger text-start" *ngIf="password.errors?.['required']">National ID is required </P>
+               <P class="text-danger text-start" *ngIf="password.errors?.['minlength']">National ID must be 14 Digits </P>
+             </div>
+            <!--===========================================================  -->
+            <!-- =========================================================== -->
+            <!-- Address -->
+            <!-- =========================================================== -->
+            <div class="form-floating mb-1">
+              <input type="text"
+              [ngClass]="{'form-control':true,'is-invalid': address.invalid &&(address.touched || login.submitted)}"
+               placeholder="name@example.com"
+               name="address" #address="ngModel" ngModel
+               required
+                 >
+              <label for="floatingInput">Address</label>
+            </div>
+            <!-- ======Error -->
+            <div
+            *ngIf="address.invalid &&(address.touched || login.submitted)">
+              <P class="text-danger text-start" *ngIf="address.errors?.['required']">Address is required</P>
+            </div>
+            <!--===========================================================  -->
+             <!-- =========================================================== -->
+            <!-- Gender -->
+            <!-- =========================================================== -->
+            <div class="form-floating mb-1">
+              <select type="email"
+              [ngClass]="{'form-control':true,'is-invalid': gender.invalid &&(gender.touched || login.submitted)}"
+               name="gender" #gender="ngModel" ngModel
+               required
+                 >
+                 <option value="male">Male</option>
+                 <option value="female">Female</option>
+                </select>
+              <label for="floatingInput">Gender</label>
+            </div>
+            <!-- ======Error -->
+            <div
+            *ngIf="gender.invalid &&(gender.touched || login.submitted)">
+              <P class="text-danger text-start" *ngIf="gender.errors?.['required']">gender is required</P>
+            </div>
+            <!--===========================================================  -->
+            <!-- =========================================================== -->
+            <!-- Grade -->
+            <!-- =========================================================== -->
+            <div class="form-floating mb-1">
+              <select type="email"
+              [ngClass]="{'form-control':true,'is-invalid': gender.invalid &&(gender.touched || login.submitted)}"
+               name="gender" #gender="ngModel" ngModel
+               required
+                 >
+                 <option value="first">First Grade</option>
+                 <option value="second">Second Grade</option>
+                 <option value="therd">Therd Grade</option>
+                 <option value="fourth">Fourth Grade</option>
+                </select>
+              <label for="floatingInput">Grade</label>
+            </div>
+            <!-- ======Error -->
+            <div
+            *ngIf="gender.invalid &&(gender.touched || login.submitted)">
+              <P class="text-danger text-start" *ngIf="gender.errors?.['required']">gender is required</P>
+            </div>
+
+
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Add Student</button>
+          </form>
+        </main>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+  <!-- Search -->
+  <div class="input-group mb-3  ">
+    <input type="search" class="form-control form-control-lg py-2" placeholder="Search... " ngModel [(ngModel)]="data" (input)="studentFilter()">
+    <span class="btn btn-primary" ><i class="fas fa-search"></i></span>
+  </div>
+  <!-- Student -->
+  <div class="card mb-3 p-2" *ngFor="let stu of result">
+    <div class="row g-0">
+      <div class="col-md-3  photo" *ngIf="stu.imgUrl !='' ; else noImg">
+        <img [src]="stu.imgUrl"  >
+      </div>
+      <ng-template class="col-md-3  photo" #noImg>
+        <div class="col-md-3  photo">
+          <img src="assets/noimg.png"  >
+        </div>
+      </ng-template>
+      <div class="col-md-9">
+        <div class="card-body" >
+          <h5 class="card-title">{{stu.name}}</h5>
+          <p class="text-muted"><i class="fas fa-map-marker-alt"></i> {{stu.address}} <i class="fas fa-venus-mars"></i> {{stu.gender}}</p>
+          <span class=" badge bg-secondary me-1">{{stu.grade}}</span>
+          <div class="mt-2 d-flex flex-row">
+            <div class="me-auto">
+             <button class="btn btn-primary btn-sm me-1"><i class="fas fa-comment-dots"></i></button>
+             <button class="btn btn-success btn-sm">profile</button>
+            </div>
+            <div class="ms-auto">
+             <button class="btn btn-danger btn-sm me-1"><i class="fas fa-trash-alt"></i></button>
+             <button class="btn btn-primary btn-sm"><i class="fas fa-edit fa-lg"></i></button>
+            </div>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

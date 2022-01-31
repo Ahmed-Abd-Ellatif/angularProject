@@ -1,0 +1,54 @@
+<main class="form-login">
+  <form #login="ngForm" (ngSubmit)="loginForm()">
+    <img class="mb-4" src="assets/logo.png">
+    <h1 class="h3 mb-3 fw-normal">Please Log in</h1>
+    <!-- =========================================================== -->
+    <!-- Email -->
+    <!-- =========================================================== -->
+    <div class="form-floating mb-1">
+      <input type="email"
+      [ngClass]="{'form-control':true,'is-invalid': email.invalid &&(email.touched || login.submitted)}"
+       placeholder="name@example.com"
+       name="email" #email="ngModel" ngModel
+       required
+       email
+         >
+      <label for="floatingInput">Email address</label>
+    </div>
+    <!-- ======Error -->
+    <div
+    *ngIf="email.invalid &&(email.touched || login.submitted)">
+      <P class="text-danger text-start" *ngIf="email.errors?.['required']">Email is required</P>
+      <p class="text-danger text-start" *ngIf="email.errors?.['email']">must be Email .. a@a.com</p>
+    </div>
+    <!-- =========================================================== -->
+    <!-- Password -->
+    <!-- =========================================================== -->
+    <div class="form-floating">
+      <input type="password"
+      [ngClass]="{'form-control':true,'is-invalid': password.invalid &&(password.touched || login.submitted)}"
+      placeholder="National ID"
+      name="password" #password="ngModel" ngModel
+      required
+      minlength="14"
+        >
+      <label for="floatingPassword">National ID</label>
+    </div>
+     <!-- ======Error -->
+     <div
+     *ngIf="password.invalid &&(password.touched || login.submitted)">
+       <P class="text-danger text-start" *ngIf="password.errors?.['required']">National ID is required </P>
+       <P class="text-danger text-start" *ngIf="password.errors?.['minlength']">National ID must be 14 Digits </P>
+     </div>
+    <!--===========================================================  -->
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
+    <a routerLink="/signup">Register Now!</a>
+
+  </form>
+</main>

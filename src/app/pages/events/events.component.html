@@ -1,0 +1,17 @@
+<div class="card mb-3" *ngFor="let event of events">
+  <!-- ******************************** -->
+  <div *ngIf="event.eventImg ; else noImg">
+    <img [src]="event.eventImg" class="card-img-top" >
+  </div>
+  <ng-template #noImg>
+    <div>
+      <img src="assets/eNoImg.webp" class="card-img-top" >
+    </div>
+  </ng-template>
+  <!-- ******************************** -->
+  <div class="card-body">
+    <h5 class="card-title">{{event.eventName}} | <i class="fas fa-calendar-week"></i> {{event.eventDate}}</h5>
+    <p class="card-text">{{event.eventTitle}}</p>
+    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+  </div>
+</div>

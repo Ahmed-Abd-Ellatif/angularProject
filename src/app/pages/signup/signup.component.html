@@ -1,0 +1,71 @@
+<main class="form-signup">
+  <form #signUp="ngForm" (ngSubmit)="signUpForm(signUp)">
+    <img class="mb-4" src="assets/logo.png">
+    <h1 class="h3 mb-3 fw-normal">Please Sign in</h1>
+    <!-- =========================================================== -->
+    <!-- Name -->
+    <!-- =========================================================== -->
+    <div class="form-floating mb-1">
+      <input type="text"
+       [ngClass]="{'form-control':true , 'is-invalid':name.invalid &&(name.touched || signUp.submitted)}"
+      placeholder="Enter Your Name"
+      name="name" #name="ngModel" ngModel
+      required minlength="3"
+      >
+      <label for="floatingInput">Name</label>
+    </div>
+    <!-- ======Error -->
+    <div
+    *ngIf="name.invalid &&(name.touched || signUp.submitted)">
+      <P class="text-danger text-start" *ngIf="name.errors?.['required']">name is required</P>
+      <P class="text-danger text-start" *ngIf="name.errors?.['minlength']">must be name min 3 letters</P>
+    </div>
+    <!-- =========================================================== -->
+    <!-- Email -->
+    <!-- =========================================================== -->
+    <div class="form-floating mb-1">
+      <input type="email"
+      [ngClass]="{'form-control':true,'is-invalid': email.invalid &&(email.touched || signUp.submitted)}"
+       placeholder="name@example.com"
+       name="email" #email="ngModel" ngModel
+       required
+       email
+         >
+      <label for="floatingInput">Email address</label>
+    </div>
+    <!-- ======Error -->
+    <div
+    *ngIf="email.invalid &&(email.touched || signUp.submitted)">
+      <P class="text-danger text-start" *ngIf="email.errors?.['required']">Email is required</P>
+      <P class="text-danger text-start" *ngIf="email.errors?.['email']">must be Email .. a@a.com</P>
+    </div>
+       <!-- =========================================================== -->
+    <!-- Password -->
+    <!-- =========================================================== -->
+    <div class="form-floating">
+      <input type="password"
+      [ngClass]="{'form-control':true,'is-invalid': password.invalid &&(password.touched || signUp.submitted)}"
+      placeholder="Password"
+      name="password" #password="ngModel" ngModel
+      required
+      minlength="6" maxlength="20"
+        >
+      <label for="floatingPassword">Password</label>
+    </div>
+     <!-- ======Error -->
+     <div
+     *ngIf="password.invalid &&(password.touched || signUp.submitted)">
+       <P class="text-danger text-start" *ngIf="password.errors?.['required']">Password is required </P>
+       <P class="text-danger text-start" *ngIf="password.errors?.['minlength']">Password must be between 6 to 20 letters</P>
+     </div>
+    <!--===========================================================  -->
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+
+  </form>
+</main>
